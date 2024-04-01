@@ -14,13 +14,13 @@ public actor TestTracer {
         // (any Tracer)?
         OTelTracer<OTelRandomIDGenerator<SystemRandomNumberGenerator>, OTelConstantSampler, OTelW3CPropagator, OTelBatchSpanProcessor<OTLPGRPCSpanExporter, ContinuousClock>, ContinuousClock>?
 
-    public func bootstrap() async {
+    public func bootstrap(serviceName: String) async {
         if !bootstrapped {
             let environment = OTelEnvironment.detected()
             let resourceDetection = OTelResourceDetection(detectors: [
                 OTelProcessResourceDetector(),
                 OTelEnvironmentResourceDetector(environment: environment),
-                .manual(OTelResource(attributes: ["service.name": "counter"])),
+                .manual(OTelResource(attributes: ["service.name": "\(serviceName)"])),
             ])
             let resource = await resourceDetection.resource(environment: environment, logLevel: .trace)
 
