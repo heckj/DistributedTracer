@@ -1,6 +1,7 @@
 // swift-tools-version: 5.9
 
 import PackageDescription
+
 let sharedSwiftSettings: [SwiftSetting] = [.enableExperimentalFeature("StrictConcurrency")]
 
 let package = Package(
@@ -10,7 +11,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "DistributedTracer",
-            targets: ["DistributedTracer"]),
+            targets: ["DistributedTracer"]
+        ),
     ],
     dependencies: [
         // Tracing
@@ -18,6 +20,7 @@ let package = Package(
         // this ^^ brings in a MASSIVE cascade of dependencies
         .package(url: "https://github.com/apple/swift-log.git", from: "1.5.0"),
         .package(url: "https://github.com/swift-server/swift-service-lifecycle.git", from: "2.0.0"),
+
         // MARK: - OTLP
 
         .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.0.0"),

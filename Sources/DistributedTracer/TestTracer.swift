@@ -11,8 +11,8 @@ public actor TestTracer {
     public static let shared = TestTracer()
 
     public var tracer:
-    // (any Tracer)?
-    OTelTracer<OTelRandomIDGenerator<SystemRandomNumberGenerator>, OTelConstantSampler, OTelW3CPropagator, OTelBatchSpanProcessor<OTLPGRPCSpanExporter, ContinuousClock>, ContinuousClock>?
+        // (any Tracer)?
+        OTelTracer<OTelRandomIDGenerator<SystemRandomNumberGenerator>, OTelConstantSampler, OTelW3CPropagator, OTelBatchSpanProcessor<OTLPGRPCSpanExporter, ContinuousClock>, ContinuousClock>?
 
     public func bootstrap() async {
         if !bootstrapped {

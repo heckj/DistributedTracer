@@ -1,5 +1,5 @@
-import XCTest
 @testable import DistributedTracer
+import XCTest
 
 final class DistributedTracerTests: XCTestCase {
     func testExample() throws {
