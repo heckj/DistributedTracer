@@ -10,11 +10,11 @@ public actor TestTracer {
     private var bootstrapped = false
     public static let shared = TestTracer()
 
-    var tracer: 
+    public var tracer:
     // (any Tracer)?
     OTelTracer<OTelRandomIDGenerator<SystemRandomNumberGenerator>, OTelConstantSampler, OTelW3CPropagator, OTelBatchSpanProcessor<OTLPGRPCSpanExporter, ContinuousClock>, ContinuousClock>?
 
-    func bootstrap() async {
+    public func bootstrap() async {
         if !bootstrapped {
             let environment = OTelEnvironment.detected()
             let resourceDetection = OTelResourceDetection(detectors: [
@@ -81,5 +81,5 @@ public actor TestTracer {
         }
     }
 
-    init() {}
+    private init() {}
 }
