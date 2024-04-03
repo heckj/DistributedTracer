@@ -22,7 +22,7 @@ public actor TestTracer {
     // today, so this is private and currently unused.
     private var tracerRunHandle: Task<Void, any Error>?
 
-    private func createTracer(serviceName: String) -> OTelTracer<OTelRandomIDGenerator<SystemRandomNumberGenerator>, OTelConstantSampler, OTelW3CPropagator, OTelBatchSpanProcessor<OTLPGRPCSpanExporter, ContinuousClock>, ContinuousClock> {
+    static func createTracer(serviceName: String) -> OTelTracer<OTelRandomIDGenerator<SystemRandomNumberGenerator>, OTelConstantSampler, OTelW3CPropagator, OTelBatchSpanProcessor<OTLPGRPCSpanExporter, ContinuousClock>, ContinuousClock> {
         let resource = OTelResource(attributes: ["service.name": "\(serviceName)"])
         let environment = OTelEnvironment.detected()
         // Here we create an OTel span exporter that sends spans via gRPC to an OTel collector.
@@ -55,7 +55,7 @@ public actor TestTracer {
     // yeah, kind of ugly
     public func bootstrap(serviceName: String) async {
         if !bootstrapped {
-            let tracer = createTracer(serviceName: serviceName)
+            let tracer = TestTracer.createTracer(serviceName: serviceName)
 
             // Set up a detached task to run this in the background indefinitely.
             // - no cancellation, just GO
