@@ -3,13 +3,14 @@ import Tracing
 import XCTest
 
 final class NonGlobalTracerTests: XCTestCase {
-
 //    override func tearDown() async throws {
 //            // Testing does NOT have a polite shutdown waiting for a flush to complete, so
 //            // we explicitly give it some extra time here to flush out any spans remaining.
 //            try await Task.sleep(for: .milliseconds(100))
 //        }
 //    }
+
+    // When you run (just) these tests together, the whole system fails because between them there's a shared global in Instruments that only allows a single, initial bootstrap.
 
     func testClosureInvokerTest() async throws {
         try await TestTracer.withTracer(serviceName: "firstTestService") {
